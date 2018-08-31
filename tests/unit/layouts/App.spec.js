@@ -1,34 +1,18 @@
 import App from '@/components/layouts/App/index.vue'
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Vuetify from 'vuetify'
-import { mount, createLocalVue } from '@vue/test-utils'
 import { TestHelpers } from '../TestHelpers'
-
-/* Add Vuetify to master Vue instance to prevent error about having
-   having multiple vue instances */
-Vue.use(Vuetify)
 
 describe('layout: App.vue', () => {
   const name = 'App'
-  const localVue = createLocalVue()
-  const router = new VueRouter()
-  let h, wrapper
-
-  localVue.use(VueRouter)
+  let h
 
   // Run these statements before each test
   beforeEach(() => {
-    wrapper = mount(App, {
-      localVue,
-      router
-    })
-
-    h = new TestHelpers(wrapper, expect)
+    h = new TestHelpers(App, 'M')
   })
 
   // Is component mounted?
   it('should mount without errors', () => {
+    debugger
     h.isInstance()
   })
 

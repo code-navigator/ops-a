@@ -1,28 +1,13 @@
 import AppContent from '@/components/layouts/AppContent/'
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Vuetify from 'vuetify'
-import { mount, createLocalVue } from '@vue/test-utils'
 import { TestHelpers } from '../TestHelpers'
 
-Vue.use(Vuetify)
-
 describe('layout: AppContent.vue', () => {
-  const localVue = createLocalVue()
   const name = 'AppContent'
-  const router = new VueRouter()
-  let h, wrapper
-
-  localVue.use(VueRouter)
+  let h
 
   // Run these statements before each test
   beforeEach(() => {
-    wrapper = mount(AppContent, {
-      router,
-      localVue
-    })
-
-    h = new TestHelpers(wrapper, expect)
+    h = new TestHelpers(AppContent, 'M')
   })
 
   // Is component mounted?

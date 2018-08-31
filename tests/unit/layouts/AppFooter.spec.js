@@ -1,20 +1,13 @@
 import AppFooter from '@/components/layouts/AppFooter/'
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import { shallowMount } from '@vue/test-utils'
 import { TestHelpers } from '../TestHelpers'
-
-Vue.use(Vuetify)
 
 describe('layout: AppFooter.vue', () => {
   const name = 'AppFooter'
-  let h, wrapper
+  let h
 
   // Run these statements before each test
   beforeEach(() => {
-    wrapper = shallowMount(AppFooter)
-
-    h = new TestHelpers(wrapper, expect)
+    h = new TestHelpers(AppFooter, 'S')
   })
 
   // Is component mounted?

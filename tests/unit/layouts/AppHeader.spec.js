@@ -1,20 +1,13 @@
 import AppHeader from '@/components/layouts/AppHeader/'
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import { mount } from '@vue/test-utils'
 import { TestHelpers } from '../TestHelpers'
-
-Vue.use(Vuetify)
 
 describe('layout: AppHeader.vue', () => {
   const name = 'AppHeader'
-  let h, wrapper
+  let h
 
   // Run these statements before each test
   beforeEach(() => {
-    wrapper = mount(AppHeader)
-
-    h = new TestHelpers(wrapper, expect)
+    h = new TestHelpers(AppHeader, 'M')
   })
 
   // Is component mounted?

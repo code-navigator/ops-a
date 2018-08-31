@@ -1,30 +1,24 @@
 import SplitPane from '@/components/controls/SplitPane/'
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import { mount } from '@vue/test-utils'
 import { TestHelpers } from '../TestHelpers'
-
-Vue.use(Vuetify)
 
 describe('layout: SplitPane.vue', () => {
   const name = 'Split-Pane'
-  let h, wrapper
+  let h
 
-  // Run these statements before each test
-  beforeEach(() => {
-    wrapper = mount(SplitPane, {
-      slots: {
-        paneL: '<div class="test"></div>',
-        paneR: '<div></div>'
-      },
+  const createWrapper = defaultPercent => {
+    h = new TestHelpers(SplitPane, 'M', {
       propsData: {
-        defaultPercent: 10,
-        minPercent: 10,
-        maxPercent: 10
+        defaultPercent
+      },
+      slots: {
+        paneL: '<div class="slotL"></div>',
+        paneR: '<div class="slotR"></div>'
       }
     })
-
-    h = new TestHelpers(wrapper, expect)
+  }
+  // Run these statements before each test
+  beforeEach(() => {
+    createWrapper(10)
   })
 
   // Is component mounted?
@@ -35,5 +29,30 @@ describe('layout: SplitPane.vue', () => {
   // Does component have correct name?
   test('has name', () => {
     h.hasName(name)
+  })
+
+  test('has class of "vertical"', () => {
+    h.hasClass('.splitter-paneL', 'vertical')
+    h.hasClass('.splitter-paneR', 'vertical')
+    h.hasClass('.splitter-pane-resizer', 'vertical')
+  })
+
+  test('has a "width" that reflects the "defaultPercent" prop', () => {
+    h.hasSelectorWithStyle('.splitter-paneL', 'width', '10%')
+    h.hasSelectorWithStyle('.splitter-paneR', 'width', '90%')
+    createWrapper(40)
+    h.hasSelectorWithStyle('.splitter-paneL', 'width', '40%')
+    h.hasSelectorWithStyle('.splitter-paneR', 'width', '60%')
+  })
+
+  test('the position of the resizer control reflects the "defaultPercent" prop', () => {
+    h.hasSelectorWithStyle('.splitter-pane-resizer', 'left', '10%')
+    createWrapper(40)
+    h.hasSelectorWithStyle('.splitter-pane-resizer', 'left', '40%')
+  })
+
+  test('rendered container has slots identified by class names', () => {
+    h.hasSelector('.slotL')
+    h.hasSelector('.slotR')
   })
 })
