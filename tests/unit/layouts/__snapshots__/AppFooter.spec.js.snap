@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`layout: AppFooter.vue renders correctly 1`] = `<v-footer-stub height="32" app="app" color="primary" dark="dark"><span class="white--text">© 2018</span></v-footer-stub>`;

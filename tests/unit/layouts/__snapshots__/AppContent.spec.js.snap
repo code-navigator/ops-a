@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`layout: AppContent.vue renders correctly 1`] = `
+<main class="v-content" style="padding: 0px 0px 0px 0px;" id="nav">
+  <div class="v-content__wrap"></div>
+</main>
+`;

@@ -1,5 +1,18 @@
 //- Application Layout
 v-app#app
-  
-  //- Main application toolbar
-  appHeader
+
+  //- Main navigation drawer
+  appDrawer(
+    :drawer="drawer"
+    :routes="routes"
+  )
+
+  //- Main application header
+  appHeader(
+    @click="toggleDrawer"
+  )
+
+  appContent
+
+  //- Main application footer
+  appFooter
