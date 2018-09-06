@@ -16,6 +16,13 @@ export class TestHelpers {
       router
     }
 
+    // The following three lines are needed to stop Vuetify
+    // from throwing data-app errors when testing components
+    // see https://github.com/vuetifyjs/vuetify/issues/3456
+    const app = document.createElement('div')
+    app.setAttribute('data-app', true)
+    document.body.appendChild(app)
+
     if (type === 'S') {
       this.wrapper = shallowMount(component, {...defaultOptions, ...options})
     } else {
@@ -23,6 +30,10 @@ export class TestHelpers {
     }
   }
 
+  change (selector) {
+    this.hasSelector(selector)
+    this.wrapper.find(selector).trigger('change')
+  }
   // Trigger window event
   click (selector) {
     this.hasSelector(selector)
@@ -44,6 +55,11 @@ export class TestHelpers {
 
   hasDataProp (prop, value) {
     expect(this.wrapper.vm[prop]).toBe(value)
+  }
+
+  hasInputValue (value) {
+    expect(this.wrapper.find('input').element.value)
+      .toBe(value)
   }
 
   // Check if component has name as expected
@@ -78,6 +94,26 @@ export class TestHelpers {
   // Check if selector has style set to given value
   hasSelectorWithStyle (selector, style, value) {
     expect(this.wrapper.find(selector).element.style[style]).toBe(value)
+  }
+
+  input (selector) {
+    this.hasSelector(selector)
+    this.wrapper.find(selector).trigger('input')
+  }
+
+  noEmits (event) {
+    expect(this.wrapper.emitted(event)).toBeUndefined()
+  }
+
+  setText (selector, text) {
+    expect(
+      this.wrapper.find(selector).setValue(text)
+    )
+  }
+
+  // Check if wrapper contains text
+  hasText (text) {
+    expect(this.wrapper.html()).toContain(text)
   }
 
   // Check if component is an instance of Vue

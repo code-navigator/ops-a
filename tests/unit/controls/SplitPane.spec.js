@@ -55,4 +55,10 @@ describe('layout: SplitPane.vue', () => {
     h.hasSelector('.slotL')
     h.hasSelector('.slotR')
   })
+
+  test('width of panes changes to 50% when the resizer is clicked', () => {
+    h.click('.splitter-pane-resizer')
+    h.hasSelectorWithStyle('.splitter-paneL', 'width', '50%')
+    h.hasSelectorWithStyle('.splitter-paneR', 'width', '50%')
+  })
 })
